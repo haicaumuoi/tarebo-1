@@ -30,7 +30,7 @@ const publicRoutes = {
     },
     {
       type: ROUTES_TYPE.public,
-      path: ROUTES_PATH.common.home,
+      path: ROUTES_PATH.user.home,
       component: HomePage,
       layout: DefaultLayout,
     },
