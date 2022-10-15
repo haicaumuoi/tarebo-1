@@ -10,17 +10,17 @@ export const ROUTES_PATH = {
     login: '/login',
     signUp: '/signUp',
     signIn: '/signIn',
-    map: '/map',
-    triplist: '/triplist',
-    todolist: '/todolist',
-    expenseslist: '/expenseslist',
-    planlist: '/planlist',
   },
   user: {
     home: '/',
     planning: '/planning',
     reviewing: '/reviewing',
     type: '/:type',
+    map: '/map',
+    triplist: '/triplist',
+    todolist: '/todolist',
+    expenseslist: '/expenseslist',
+    planlist: '/planlist',
   },
   admin: {
     home: '/home',
@@ -55,4 +55,3 @@ export const PASSWORD_REGEX_FULL =
 //#endregion
 export const PHONE_REGEX_FULL = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/;
 //#endregion
-export const GOOGLE_API_KEY = 'AIzaSyDBbvpzeya5712SmCuTwNBKtT8Z1ooeTvs';
