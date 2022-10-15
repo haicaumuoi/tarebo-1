@@ -3,12 +3,12 @@ import { Autocomplete } from '@react-google-maps/api';
 import triplist from '~/assets/images/triplist.png';
 
 function Index() {
-  const [triplist, setTriplist] = React.useState([]);
+  const [triplists, setTriplist] = React.useState([]);
 
   return (
     <div className="w-5/12 h-screen bg-[#67AB93] pt-56 overflow-y-scroll">
       <div className="text-[#fff] text-4xl flex w-full justify-between items-center h-fit py-3 px-16 font-semibold">
-        <div>Chuyến đi của bạn ( {triplist.length} )</div>
+        <div>Chuyến đi của bạn ( {triplists.length} )</div>
         <div className="border-[#fff] border-4 rounded-2xl px-16 py-2 cursor-pointer">Đi nào!</div>
       </div>
       <div className="flex justify-center items-center flex-col">
