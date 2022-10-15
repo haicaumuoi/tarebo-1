@@ -10,6 +10,12 @@ const NotFoundPage = lazy(() => import('~/components/NotFound'));
 const PrivateRoute = lazy(() => import('~/components/PrivateRoute'));
 const LoginPage = lazy(() => import('~/features/User/Login'));
 const SignUpPage = lazy(() => import('~/features/User/SignUp'));
+const SignInPage = lazy(() => import('~/features/User/SignInPage'));
+const Map = lazy(() => import('~/features/User/Map'));
+const TripList = lazy(() => import('~/features/User/TripList'));
+const PlanList = lazy(() => import('~/features/User/PlanList'));
+const TodoList = lazy(() => import('~/features/User/TodoList'));
+const ExpensesList = lazy(() => import('~/features/User/ExpensesList'));
 
 const HomePage = lazy(() => import('~/features/User/Home'));
 
@@ -44,6 +50,42 @@ const publicRoutes = {
       type: ROUTES_TYPE.public,
       path: ROUTES_PATH.common.signUp,
       component: SignUpPage,
+      layout: DefaultLayout,
+    },
+    {
+      type: ROUTES_TYPE.public,
+      path: ROUTES_PATH.common.signIn,
+      component: SignInPage,
+      layout: DefaultLayout,
+    },
+    {
+      type: ROUTES_TYPE.public,
+      path: ROUTES_PATH.common.map,
+      component: Map,
+      layout: DefaultLayout,
+    },
+    {
+      type: ROUTES_TYPE.public,
+      path: ROUTES_PATH.common.planlist,
+      component: PlanList,
+      layout: DefaultLayout,
+    },
+    {
+      type: ROUTES_TYPE.public,
+      path: ROUTES_PATH.common.triplist,
+      component: TripList,
+      layout: DefaultLayout,
+    },
+    {
+      type: ROUTES_TYPE.public,
+      path: ROUTES_PATH.common.todolist,
+      component: TodoList,
+      layout: DefaultLayout,
+    },
+    {
+      type: ROUTES_TYPE.public,
+      path: ROUTES_PATH.common.expenseslist,
+      component: ExpensesList,
       layout: DefaultLayout,
     },
   ],

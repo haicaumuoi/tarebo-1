@@ -9,6 +9,12 @@ export const ROUTES_PATH = {
     notFound: '*',
     login: '/login',
     signUp: '/signUp',
+    signIn: '/signIn',
+    map: '/map',
+    triplist: '/triplist',
+    todolist: '/todolist',
+    expenseslist: '/expenseslist',
+    planlist: '/planlist',
   },
   user: {
     home: '/',
@@ -41,3 +47,12 @@ export const HOME_FEATURES = {
 export const LOGOUT_TYPE = 'logout';
 
 //#endregion
+export const EMAIL_PASSWORD_REGEX_FULL =
+  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+export const PASSWORD_REGEX_FULL =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
+//#endregion
+export const PHONE_REGEX_FULL = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/;
+//#endregion
+export const GOOGLE_API_KEY = 'AIzaSyDBbvpzeya5712SmCuTwNBKtT8Z1ooeTvs';
