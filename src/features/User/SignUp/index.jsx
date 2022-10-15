@@ -1,19 +1,27 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-
-import { EMAIL_PASSWORD_REGEX_FULL, PASSWORD_REGEX_FULL, PHONE_REGEX_FULL } from '~/constants';
+import bgImg from '~/assets/images/bg-login.jpg';
+import {
+  EMAIL_PASSWORD_REGEX_FULL,
+  PASSWORD_REGEX_FULL,
+  ROUTES_PATH,
+  PHONE_REGEX_FULL,
+} from '~/constants';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import axiosInstance from '~/app/api';
+import { toast } from 'react-toastify';
 
 const defaultValues = {
-  username: '',
+  email: '',
+  phoneNumber: '',
   password: '',
 };
 
 const schema = yup
   .object({
-    username: yup
+    email: yup
       .string()
       .required('Enter user name or email')
       .matches(
@@ -46,7 +54,22 @@ const SignUpPage = () => {
     defaultValues,
     resolver: yupResolver(schema),
   });
-  const onSubmit = (data) => console.log(data);
+
+  const navigate = useNavigate();
+
+  const onSubmit = async (data) => {
+    try {
+      const { response, msg } = await axiosInstance.post('/signup', data);
+      console.log(response);
+      if (+response === 200) {
+        return navigate(ROUTES_PATH.common.login);
+      } else {
+        toast.error(msg);
+      }
+    } catch (error) {
+      console.log({ error });
+    }
+  };
 
   return (
     <div className="w-screen h-screen flex justify-center items-center">
@@ -57,11 +80,11 @@ const SignUpPage = () => {
           <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-5">
             <div className="text-gray-400">Email</div>
             <input
-              {...register('username')}
+              {...register('email')}
               className="border border-gray-400 h-16 rounded-lg my-2 py-5 px-4 focus:outline-none"
               id="email"
             />
-            {errors.username && (
+            {errors.email && (
               <span className="text-[#df2a2a]">Nhập tên đăng nhập hoặc email hoàn chỉnh</span>
             )}
             <div className="text-gray-400">Số điện thoại</div>

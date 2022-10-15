@@ -1,20 +1,21 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import bgImg from '~/assets/images/bg-login.jpg';
-import { EMAIL_PASSWORD_REGEX_FULL, PASSWORD_REGEX_FULL } from '~/constants';
+import { EMAIL_PASSWORD_REGEX_FULL, PASSWORD_REGEX_FULL, ROUTES_PATH } from '~/constants';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import axiosInstance from '~/app/api';
+import { toast } from 'react-toastify';
 
 const defaultValues = {
-  username: '',
+  email: '',
   password: '',
 };
 
 const schema = yup
   .object({
-    username: yup
+    email: yup
       .string()
       .required('Enter user name or email')
       .matches(
@@ -40,12 +41,27 @@ const LoginPage = () => {
     defaultValues,
     resolver: yupResolver(schema),
   });
-  const onSubmit = (data) => console.log(data);
+  const navigate = useNavigate();
+
+  const onSubmit = async (data) => {
+    try {
+      const { code, msg, data: resData } = await axiosInstance.post('/signin', data);
+
+      if (+code === 200) {
+        console.log({ resData });
+        return navigate(ROUTES_PATH.user.home);
+      } else {
+        toast.error(msg);
+      }
+    } catch (error) {
+      console.log({ error });
+    }
+  };
 
   const [userList, setUserList] = React.useState([]);
 
   useEffect(() => {
-    axiosInstance.get('http://localhost:3000/getAllUser').then((res) => {
+    axiosInstance.get('/getAllUser').then((res) => {
       setUserList(res);
       console.log(userList);
     });
@@ -72,11 +88,11 @@ const LoginPage = () => {
           <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-4">
             <div className="text-[#7c7c7c]">Email</div>
             <input
-              {...register('username')}
+              {...register('email')}
               className="border border-[#7c7c7c] h-16 rounded-lg my-2 py-5 px-4 focus:outline-none"
               id="email"
             />
-            {errors.username && (
+            {errors.email && (
               <span className="text-[#df2a2a]">Nhập tên đăng nhập hoặc email hoàn chỉnh</span>
             )}
             <div className="text-[#7c7c7c]">Mật Khẩu</div>

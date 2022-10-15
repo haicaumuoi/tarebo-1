@@ -39,7 +39,7 @@ function Map() {
   };
 
   return (
-    <LoadScript googleMapsApiKey={GOOGLE_API_KEY} libraries={['places']}>
+    <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAP_API_KEY} libraries={['places']}>
       <div className="flex">
         <div className="w-5/12 h-screen bg-[#aa1e1e] pt-56 overflow-y-scroll">
           <div className="text-[#fff] ">this is leftside</div>
