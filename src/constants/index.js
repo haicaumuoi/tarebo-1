@@ -55,3 +55,10 @@ export const PASSWORD_REGEX_FULL =
 //#endregion
 export const PHONE_REGEX_FULL = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/;
 //#endregion
+
+export const API_PATH = {
+  auth: {
+    login: '/auth/signin',
+    signup: '/auth/signup',
+  },
+};

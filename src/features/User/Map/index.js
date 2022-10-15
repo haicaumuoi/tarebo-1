@@ -1,7 +1,5 @@
 import { Autocomplete, GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import React, { useMemo } from 'react';
-import { GOOGLE_API_KEY } from '~/constants';
-import { Routes, Route } from 'react-router-dom';
 
 function Map() {
   const [map, setMap] = React.useState(/** @type google.map.Map  */ (null));

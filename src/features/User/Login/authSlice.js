@@ -12,15 +12,13 @@ export const authSlice = createSlice({
     setLoading: (state, { payload }) => {
       state.loading = payload;
     },
-    login: (state, { payload: { userInfo } }) => {
+    login: (state, { payload }) => {
       state.loading = false;
-      state.userInfo = userInfo;
-      state._id = userInfo.id;
+      state.userInfo = payload;
     },
     logout: (state) => {
       state.loading = false;
       state.userInfo = null;
-      state._id = null;
     },
     register: (state, { payload: { userInfo } }) => {
       state.loading = false;

@@ -8,6 +8,7 @@ import ACTION1 from '~/assets/images/action-1.png';
 import { HOME_FEATURES, ROUTES_PATH } from '~/constants';
 import Features from './components/Features';
 import { Footer } from '~/components';
+import { useSelector } from 'react-redux';
 
 const MOCK_DATA = {
   _marginTop: '80px',
@@ -26,6 +27,8 @@ const MOCK_DATA = {
 
 const Home = () => {
   const { news, categories, _marginTop } = MOCK_DATA;
+  const userInfo = useSelector((state) => state.auth.userInfo);
+  console.log({ userInfo });
   return (
     <Box>
       <Box className="container">

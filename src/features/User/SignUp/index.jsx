@@ -1,21 +1,21 @@
-import React, { useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import bgImg from '~/assets/images/bg-login.jpg';
-import {
-  EMAIL_PASSWORD_REGEX_FULL,
-  PASSWORD_REGEX_FULL,
-  ROUTES_PATH,
-  PHONE_REGEX_FULL,
-} from '~/constants';
 import { yupResolver } from '@hookform/resolvers/yup';
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import * as yup from 'yup';
 import axiosInstance from '~/app/api';
-import { toast } from 'react-toastify';
+import {
+  API_PATH,
+  EMAIL_PASSWORD_REGEX_FULL,
+  PASSWORD_REGEX_FULL,
+  PHONE_REGEX_FULL,
+  ROUTES_PATH,
+} from '~/constants';
 
 const defaultValues = {
   email: '',
-  phoneNumber: '',
+  phone: '',
   password: '',
 };
 
@@ -28,7 +28,7 @@ const schema = yup
         EMAIL_PASSWORD_REGEX_FULL,
         'At least one lowercase, uppercase, numbers, and special characters'
       ),
-    phoneNumber: yup
+    phone: yup
       .string()
       .required('Enter phone number')
       .matches(
@@ -59,7 +59,10 @@ const SignUpPage = () => {
 
   const onSubmit = async (data) => {
     try {
-      const { response, msg } = await axiosInstance.post('/signup', data);
+      const { response, msg } = await axiosInstance.post(API_PATH.auth.signup, {
+        ...data,
+        username: data.email.split('@')[0],
+      });
       console.log(response);
       if (+response === 200) {
         return navigate(ROUTES_PATH.common.login);
@@ -89,13 +92,11 @@ const SignUpPage = () => {
             )}
             <div className="text-gray-400">Số điện thoại</div>
             <input
-              {...register('phoneNumber')}
+              {...register('phone')}
               className="border border-gray-400 h-16 rounded-lg my-2 py-5 px-4 focus:outline-none"
               id="phoneNumber"
             />
-            {errors.phoneNumber && (
-              <span className="text-[#df2a2a]">Nhập số điện thoại hoàn chỉnh</span>
-            )}
+            {errors.phone && <span className="text-[#df2a2a]">Nhập số điện thoại hoàn chỉnh</span>}
             <div className="text-gray-400">Mật Khẩu</div>
             <input
               {...register('password')}

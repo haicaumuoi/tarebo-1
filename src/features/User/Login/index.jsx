@@ -2,11 +2,13 @@ import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import bgImg from '~/assets/images/bg-login.jpg';
-import { EMAIL_PASSWORD_REGEX_FULL, PASSWORD_REGEX_FULL, ROUTES_PATH } from '~/constants';
+import { API_PATH, EMAIL_PASSWORD_REGEX_FULL, PASSWORD_REGEX_FULL, ROUTES_PATH } from '~/constants';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import axiosInstance from '~/app/api';
 import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { login } from './authSlice';
 
 const defaultValues = {
   email: '',
@@ -42,13 +44,14 @@ const LoginPage = () => {
     resolver: yupResolver(schema),
   });
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const onSubmit = async (data) => {
     try {
-      const { code, msg, data: resData } = await axiosInstance.post('/signin', data);
+      const { code, msg, data: resData } = await axiosInstance.post(API_PATH.auth.login, data);
 
       if (+code === 200) {
-        console.log({ resData });
+        await dispatch(login(resData));
         return navigate(ROUTES_PATH.user.home);
       } else {
         toast.error(msg);

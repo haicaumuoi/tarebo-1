@@ -34,12 +34,7 @@ const publicRoutes = {
       component: NotFoundPage,
       layout: null,
     },
-    {
-      type: ROUTES_TYPE.public,
-      path: ROUTES_PATH.user.home,
-      component: HomePage,
-      layout: DefaultLayout,
-    },
+
     {
       type: ROUTES_TYPE.public,
       path: ROUTES_PATH.common.login,
@@ -56,6 +51,14 @@ const publicRoutes = {
       type: ROUTES_TYPE.public,
       path: ROUTES_PATH.common.signIn,
       component: SignInPage,
+      layout: DefaultLayout,
+    },
+  ],
+  [ROLE.user]: [
+    {
+      type: ROUTES_TYPE.public,
+      path: ROUTES_PATH.user.home,
+      component: HomePage,
       layout: DefaultLayout,
     },
     {
@@ -89,7 +92,6 @@ const publicRoutes = {
       layout: DefaultLayout,
     },
   ],
-  [ROLE.user]: [],
   [ROLE.admin]: [
     {
       type: ROUTES_TYPE.public,
