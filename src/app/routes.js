@@ -2,22 +2,16 @@ import _ from 'lodash';
 import { Fragment, lazy } from 'react';
 import React, { Route, Routes } from 'react-router-dom';
 import { ROLE, ROUTES_PATH, ROUTES_TYPE } from '~/constants';
+import { DashboardLayout, DefaultLayout } from '~/layouts';
 
-const AdUsersPage = lazy(() => import('~/features/Admin/Users'));
-const AdStatisticPage = lazy(() => import('~/features/Admin/Statistics'));
-const AdReportsPage = lazy(() => import('~/features/Admin/Reports'));
-const AdCategoriesPage = lazy(() => import('~/features/Admin/Categories'));
+const AdStatisticPage = lazy(() => import('~/features/Admin/Home'));
 
 const NotFoundPage = lazy(() => import('~/components/NotFound'));
 const PrivateRoute = lazy(() => import('~/components/PrivateRoute'));
+const LoginPage = lazy(() => import('~/features/User/Login'));
+const SignUpPage = lazy(() => import('~/features/User/SignUp'));
 
-const UploadPage = lazy(() => import('~/features/Upload'));
-const ProfilePage = lazy(() => import('~/features/Profile'));
-const PostDetailPage = lazy(() => import('~/features/PostDetail'));
-const CollectionsPage = lazy(() => import('~/features/Collections'));
-const HomePage = lazy(() => import('~/features/Home'));
-
-import { DashboardLayout, DefaultLayout, HeaderOnlyLayout } from '~/layouts';
+const HomePage = lazy(() => import('~/features/User/Home'));
 
 /**
  * @param {string} type để phân loại public với private
@@ -32,75 +26,40 @@ const publicRoutes = {
       type: ROUTES_TYPE.public,
       path: ROUTES_PATH.common.notFound,
       component: NotFoundPage,
-      layout: HeaderOnlyLayout,
+      layout: null,
     },
-  ],
-  [ROLE.user]: [
     {
       type: ROUTES_TYPE.public,
-      path: ROUTES_PATH.user.postDetail,
-      component: PostDetailPage,
-      layout: HeaderOnlyLayout,
+      path: ROUTES_PATH.common.home,
+      component: HomePage,
+      layout: DefaultLayout,
+    },
+    {
+      type: ROUTES_TYPE.public,
+      path: ROUTES_PATH.common.login,
+      component: LoginPage,
+      layout: DefaultLayout,
+    },
+    {
+      type: ROUTES_TYPE.public,
+      path: ROUTES_PATH.common.signUp,
+      component: SignUpPage,
+      layout: DefaultLayout,
     },
   ],
+  [ROLE.user]: [],
   [ROLE.admin]: [
     {
       type: ROUTES_TYPE.public,
-      path: ROUTES_PATH.admin.statistic,
+      path: ROUTES_PATH.admin.home,
       component: AdStatisticPage,
-    },
-    {
-      type: ROUTES_TYPE.public,
-      path: ROUTES_PATH.admin.users,
-      component: AdUsersPage,
-    },
-    {
-      type: ROUTES_TYPE.public,
-      path: ROUTES_PATH.admin.reports,
-      component: AdReportsPage,
-    },
-    {
-      type: ROUTES_TYPE.public,
-      path: ROUTES_PATH.admin.categories,
-      component: AdCategoriesPage,
     },
   ],
 };
 
 const privateRoutes = {
-  [ROLE.common]: [
-    {
-      type: ROUTES_TYPE.private,
-      path: ROUTES_PATH.common.home,
-      component: HomePage,
-      layout: DefaultLayout,
-    },
-  ],
-  [ROLE.user]: [
-    {
-      type: ROUTES_TYPE.private,
-      path: ROUTES_PATH.user.upload,
-      component: UploadPage,
-      layout: HeaderOnlyLayout,
-    },
-    {
-      type: ROUTES_TYPE.private,
-      path: `${ROUTES_PATH.user.upload}/@:id`,
-      component: UploadPage,
-      layout: HeaderOnlyLayout,
-    },
-    {
-      type: ROUTES_TYPE.private,
-      path: ROUTES_PATH.user.profile,
-      component: ProfilePage,
-      layout: HeaderOnlyLayout,
-    },
-    {
-      type: ROUTES_TYPE.private,
-      path: ROUTES_PATH.user.collections,
-      component: CollectionsPage,
-    },
-  ],
+  [ROLE.common]: [],
+  [ROLE.user]: [],
   [ROLE.admin]: [],
 };
 

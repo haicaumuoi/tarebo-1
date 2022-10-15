@@ -9,8 +9,7 @@ import {
   REGISTER,
   REHYDRATE,
 } from 'redux-persist';
-
-import authReducer from '~/features/Authenticate/authSlice';
+import authReducer from '~/features/User/Login/authSlice';
 import { authConfig } from './configs';
 
 const rootReducer = combineReducers({
